@@ -10,13 +10,13 @@ pool: myAgentPool
 
 variables:
   # TODO: Replace the service connection name as used in the DevOps project settings
-  azureServiceConnectionId: 'mySC'
+  azureServiceConnectionId: 'project2connection'
   
   # TODO: Specify the value of the existing Web App name
   webAppName: 'flask-ml-sl-app'
 
   # Environment name
-  environmentName: 'flask-ml-sl-app'
+  environmentName: 'flask-ml-sl-env'
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
@@ -66,9 +66,7 @@ stages:
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
-    pool:
-      vmImage: $(vmImageName)
-    environment: $(environmentName)
+    pool: myAgentPool
     strategy:
       runOnce:
         deploy:
